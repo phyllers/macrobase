@@ -2,11 +2,10 @@ package edu.stanford.futuredata.macrobase.pipeline;
 
 import edu.stanford.futuredata.macrobase.analysis.summary.aplinear.APLArcMomentSummarizer;
 import edu.stanford.futuredata.macrobase.analysis.summary.aplinear.APLExplanation;
-import edu.stanford.futuredata.macrobase.analysis.summary.aplinear.APLMomentSummarizer;
 import edu.stanford.futuredata.macrobase.analysis.summary.aplinear.APLSummarizer;
 import edu.stanford.futuredata.macrobase.datamodel.DataFrame;
 import edu.stanford.futuredata.macrobase.datamodel.Schema;
-import edu.stanford.futuredata.macrobase.util.MacrobaseException;
+import edu.stanford.futuredata.macrobase.util.MacroBaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,13 +86,13 @@ public class ArcPowerCubePipeline implements Pipeline {
         return explanation;
     }
 
-    private Map<String, Schema.ColType> getColTypes() throws MacrobaseException {
+    private Map<String, Schema.ColType> getColTypes() throws MacroBaseException {
         Map<String, Schema.ColType> colTypes = new HashMap<>();
         colTypes.put(
-                minColumn.orElseThrow(() -> new MacrobaseException("min column not present in config")),
+                minColumn.orElseThrow(() -> new MacroBaseException("min column not present in config")),
                 Schema.ColType.DOUBLE);
         colTypes.put(
-                maxColumn.orElseThrow(() -> new MacrobaseException("max column not present in config")),
+                maxColumn.orElseThrow(() -> new MacroBaseException("max column not present in config")),
                 Schema.ColType.DOUBLE);
         for (String col : powerSumColumns) {
             colTypes.put(col, Schema.ColType.DOUBLE);
@@ -105,9 +104,9 @@ public class ArcPowerCubePipeline implements Pipeline {
         APLArcMomentSummarizer summarizer = new APLArcMomentSummarizer();
         summarizer.setK(k);
         summarizer.setMinColumn(minColumn.orElseThrow(
-                () -> new MacrobaseException("min column not present in config")));
+                () -> new MacroBaseException("min column not present in config")));
         summarizer.setMaxColumn(maxColumn.orElseThrow(
-                () -> new MacrobaseException("max column not present in config")));
+                () -> new MacroBaseException("max column not present in config")));
         summarizer.setPowerSumColumns(powerSumColumns);
 
         summarizer.setAttributes(attributes);
