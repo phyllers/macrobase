@@ -52,6 +52,15 @@ public class ArcSinhMomentStruct {
         updateScales();
     }
 
+    public void merge(ArcSinhMomentStruct ms2) {
+        this.min = Math.min(this.min, ms2.min);
+        this.max = Math.max(this.max, ms2.max);
+        for (int i = 0; i < powerSums.length; i++) {
+            powerSums[i] += ms2.powerSums[i];
+        }
+        updateScales();
+    }
+
     public double convert(double x) {
         double xS = FastMath.asinh(x);
         return (xS - xc) / xr;
